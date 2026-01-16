@@ -198,6 +198,7 @@ The Economic Decision Advisor is built using modern, accessible technologies ali
 - Python 3.10 or higher
 - Node.js 18 or higher
 - npm or yarn package manager
+- Letta (for stateful agent memory)
 
 ### 1. Clone the Repository
 
@@ -246,17 +247,28 @@ npm install
 
 ### 4. Running the Application
 
-Start the backend server (from the `backend` directory with virtual environment activated):
+You need to run three components: the Letta server, the backend, and the frontend.
+
+**Start the Letta server** (required for stateful agent memory):
 
 ```bash
-uvicorn main:app --reload
+letta server
+```
+
+**Start the backend server** (in a new terminal, from the `backend` directory with virtual environment activated):
+
+```bash
+cd backend
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m app.main
 ```
 
 The backend API will be available at `http://localhost:8000`.
 
-In a separate terminal, start the frontend development server (from the `frontend` directory):
+**Start the frontend** (in a new terminal, from the `frontend` directory):
 
 ```bash
+cd frontend
 npm run dev
 ```
 
