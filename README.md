@@ -191,6 +191,116 @@ The Economic Decision Advisor is built using modern, accessible technologies ali
 - **Frontend Framework**: React or Vue.js for web-based chat interface (or desktop app using Electron)
 - **Orchestration**: Python-based agent loop with structured prompting and tool-calling libraries (e.g., LangChain, LlamaIndex, or custom implementation)
 
+## Installation
+
+### Prerequisites
+
+- Python 3.10 or higher
+- Node.js 18 or higher
+- npm or yarn package manager
+- Letta CLI (for stateful agent memory)
+
+Install Letta globally:
+
+```bash
+pip install letta
+```
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/economic-advisor.git
+cd economic-advisor
+```
+
+### 2. Backend Setup
+
+Navigate to the backend directory and create a virtual environment:
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+Install the Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Configure environment variables by copying the example file and adding your API keys:
+
+```bash
+cp .env.example .env
+```
+
+Edit the `.env` file and add your API keys:
+
+**Required:**
+
+- **OPENAI_API_KEY**: Your OpenAI API key for GPT-4o access (required for the Letta agent)
+
+**Optional** (the app will work with limited functionality without these):
+
+- **FRED_API_KEY**: Get a free key at https://fred.stlouisfed.org/docs/api/api_key.html (falls back to demo mode)
+- **NEWS_API_KEY**: Get a free key at https://newsapi.org/ (returns mock data if not set)
+- **EXCHANGE_RATE_API_KEY**: Get a free key at https://exchangerate-api.com/ (uses free tier without key)
+
+**Server Configuration** (optional, defaults shown):
+
+- **HOST**: Server host (default: `0.0.0.0`)
+- **PORT**: Server port (default: `8000`)
+
+### 3. Frontend Setup
+
+Open a new terminal and navigate to the frontend directory:
+
+```bash
+cd frontend
+npm install
+```
+
+### 4. Running the Application
+
+You need to run three components: the Letta server, the backend, and the frontend.
+
+**Start the Letta server** (required for stateful agent memory):
+
+```bash
+letta server
+```
+
+The Letta server will run on `http://localhost:8283`. Make sure the `OPENAI_API_KEY` is set in your environment for Letta to use.
+
+**Start the backend server** (in a new terminal, from the `backend` directory with virtual environment activated):
+
+```bash
+cd backend
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m app.main
+```
+
+The backend API will be available at `http://localhost:8000`.
+
+**Start the frontend** (in a new terminal, from the `frontend` directory):
+
+```bash
+cd frontend
+npm run dev
+```
+
+The frontend will be available at `http://localhost:5173`.
+
+### 5. Running Tests
+
+To run the backend tests:
+
+```bash
+cd backend
+pytest
+```
+
 ## Conclusion
 
 The Economic Decision Advisor demonstrates that agentic AI is not science fiction—it is a practical, learnable approach to building intelligent systems that reason autonomously, integrate diverse information sources, and adapt to individual users over time. By combining an LLM's reasoning with real economic data, this project grounds abstract agentic concepts in a tangible, relatable domain. Through building and deploying this system, students gain hands-on experience with the core techniques reshaping AI development today.
