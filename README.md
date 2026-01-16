@@ -198,7 +198,13 @@ The Economic Decision Advisor is built using modern, accessible technologies ali
 - Python 3.10 or higher
 - Node.js 18 or higher
 - npm or yarn package manager
-- Letta (for stateful agent memory)
+- Letta CLI (for stateful agent memory)
+
+Install Letta globally:
+
+```bash
+pip install letta
+```
 
 ### 1. Clone the Repository
 
@@ -231,10 +237,20 @@ cp .env.example .env
 
 Edit the `.env` file and add your API keys:
 
-- **OPENAI_API_KEY**: Your OpenAI API key for GPT-4 access
-- **FRED_API_KEY**: Get a free key at https://fred.stlouisfed.org/docs/api/api_key.html
-- **NEWS_API_KEY**: Get a free key at https://newsapi.org/
-- **EXCHANGE_RATE_API_KEY**: Get a free key at https://exchangerate-api.com/
+**Required:**
+
+- **OPENAI_API_KEY**: Your OpenAI API key for GPT-4o access (required for the Letta agent)
+
+**Optional** (the app will work with limited functionality without these):
+
+- **FRED_API_KEY**: Get a free key at https://fred.stlouisfed.org/docs/api/api_key.html (falls back to demo mode)
+- **NEWS_API_KEY**: Get a free key at https://newsapi.org/ (returns mock data if not set)
+- **EXCHANGE_RATE_API_KEY**: Get a free key at https://exchangerate-api.com/ (uses free tier without key)
+
+**Server Configuration** (optional, defaults shown):
+
+- **HOST**: Server host (default: `0.0.0.0`)
+- **PORT**: Server port (default: `8000`)
 
 ### 3. Frontend Setup
 
@@ -254,6 +270,8 @@ You need to run three components: the Letta server, the backend, and the fronten
 ```bash
 letta server
 ```
+
+The Letta server will run on `http://localhost:8283`. Make sure the `OPENAI_API_KEY` is set in your environment for Letta to use.
 
 **Start the backend server** (in a new terminal, from the `backend` directory with virtual environment activated):
 
